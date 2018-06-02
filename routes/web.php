@@ -11,12 +11,15 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+Route::get('/restricted', 'MainController@restricted');
 
 Auth::routes();
 
-Route::get('/Dashboard', 'HomeController@index')->name('Dashboard');
-Route::get('Dashboard/roles', 'HomeController@roles')->name('roles');
-Route::get('Dashboard/members', 'HomeController@members')->name('members');
+Route::get('/Dashboard', 'DashboardController@index')->name('Dashboard');
+Route::get('Dashboard/roles', 'DashboardController@roles')->name('roles');
+Route::get('Dashboard/members', 'DashboardController@members')->name('members');
+Route::get('Dashboard/Create', 'DashboardController@create');
+Route::post('forms/changerole', 'forms@change_role');
+Route::post('storeUser', 'forms@storeUser')->name('createUser');
+Route::get("forms/deleteUser/{user_id}", 'forms@destroy');

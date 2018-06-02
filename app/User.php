@@ -77,4 +77,8 @@ public function hasRole($role)
   return null !== $this->roles()->where('name', $role)->first();
 
 }
+public function roleUser()
+    {
+      return $this->hasOne(RoleUser::class);
+    }
 }

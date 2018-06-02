@@ -89,11 +89,9 @@
             @endif
 
             <div class="content">
-                @if(Auth::guest())
-                <div class="title m-b-md">
-                        <a href="{{ url('/restricted') }}">restricted</a>
-                </div>
-                @endif
+                    <div class="title m-b-md">
+                        Restricted Area
+                    </div>
                 <div class="title m-b-md">
                     @if(Auth::check())
                     Hello {{ Auth::user()->name }}  
