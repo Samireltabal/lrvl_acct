@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Role;
 use App\User;
+use App\Suppliers;
 
 use Illuminate\Http\Request;
 
@@ -17,4 +18,5 @@ class MainController extends Controller
    public function restricted() {
     return view('restricted');
    }
+
 }

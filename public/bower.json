@@ -1,0 +1,21 @@
+{
+  "name": "public",
+  "homepage": "https://github.com/Samireltabal/lrvl_acct",
+  "authors": [
+    "Samir M Eltabal \\macbook <samir.m.eltabal@gmail.com>"
+  ],
+  "description": "public assets",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gentelella": "^1.4.0"
+  }
+}

@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ asset('bower_components/izitoast/dist/css/iziToast.min.css') }}" rel="stylesheet">
 
         <title>Laravel</title>
 
@@ -66,6 +67,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
+                <a href="#" class="trigger-success">Success</a>
             @if (Route::has('login'))  
             <div class="top-right links">
                     
@@ -111,5 +113,29 @@
                 </div>
             </div>
         </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="{{ asset('bower_components/izitoast/dist/js/iziToast.min.js') }}" defer></script>    
+
+        <script type="text/javascript">
+            $(".trigger-success").on('click', function (event) {
+    event.preventDefault();
+
+    iziToast.success({
+        id: 'success',
+        title: 'Success',
+        message: 'Thank you for your visit',
+        position: 'bottomRight',
+        transitionIn: 'bounceInLeft',
+        // iconText: 'star',
+        onOpened: function(instance, toast){
+             console.info(instance)
+        },
+        onClosed: function(instance, toast, closedBy){
+            console.info('closedBy: ' + closedBy);
+        }
+    });
+});
+        </script>
+        
     </body>
 </html>

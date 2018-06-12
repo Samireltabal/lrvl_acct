@@ -12,6 +12,7 @@
             @if(auth::check())
             <ul class="navbar-nav mr-auto">
             <li><a href="/Dashboard" class="nav-link">{{ __('Home') }}</a></li>
+            <li><a href="/Suppliers" class="nav-link">Suppliers</a></li>
             <li class='nav-item dropdown'>
                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> {{ __('Members') }} </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">

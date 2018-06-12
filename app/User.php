@@ -81,4 +81,8 @@ public function roleUser()
     {
       return $this->hasOne(RoleUser::class);
     }
+public function logs() 
+    {
+      return $this->hasMany('App\logs');
+    }
 }
