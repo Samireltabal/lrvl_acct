@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('bower_componenets/gentelella/production/images/favicon.ico') }}" type="image/ico" />
 
-    <title>{{ config('app.name', 'Laravel') }} | {{ request()->route()->getAction('as') }}</title>
+    <title>{{ get_option('app_name') }} | {{ request()->route()->getAction('as') }}</title>
 
     <link href="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bower_components/gentelella/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
@@ -27,6 +27,8 @@
       <!-- Custom Theme Style -->
     <link href="{{ asset('bower_components/gentelella/build/css/custom.min.css') }}" rel="stylesheet">
         <!-- Carrot Custem CSS -->
+        <!-- Jquery ui-->
+    <link href="{{ asset('bower_components/jquery-ui/themes/base/all.css') }}" rel="stylesheet">
     <link href="{{ asset('css/myapp.css') }}" rel="stylesheet">
 
      <!-- JQuery -->
@@ -35,12 +37,24 @@
 
   </head>
   <body class="nav-md">
+        @include('inc.messages')
     <div class="container body">
       <div class="main_container">
         <!-- sidebar menu -->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
+            <?php
+              if (Auth::user()->authorizeRoles(['manager']) !== false) {
+            ?>
                 @include('admin.sidebar')
+            <?php
+                }else{
+                    ?>
+                @include('admin.membersidebar')
+                    <?php 
+                }
+              
+              ?>
               </div>
             </div>
           <!-- /sidebar Menu -->
@@ -90,11 +104,13 @@
     <script src="{{ asset('bower_components/gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}" defer></script> --}}
         <!-- DateJS -->
     <script src="{{ asset('bower_components/gentelella/vendors/DateJS/build/date.js') }}" defer></script>
+
         <!-- bootstrap-daterangepicker -->
     <script src="{{ asset('bower_components/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js') }}" defer></script>
     <script src="{{ asset('bower_components/gentelella/vendors/moment/min/moment.min.js') }}" defer></script>
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('bower_components/gentelella/build/js/custom.js') }}" defer></script>
+     <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
 
     <script src="{{ asset('bower_components/izitoast/dist/js/iziToast.min.js') }}" defer></script>    
     <!-- Custom Theme Scripts -->

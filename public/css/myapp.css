@@ -4,3 +4,104 @@
     padding:0;
     line-height: 1em;
 }
+.centered-block {
+    margin: 0 auto;
+}
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+label.fileUpload:before {
+    font-family: 'FontAwesome';
+    font-size:1.2em;
+    padding-right: 0.5em;
+    content: "\f083";
+}
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: red;
+}
+
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+
+.img-circle.profile_img {
+    margin-left: 0%;
+}
+.table-img { 
+    max-width:32px; 
+    margin:0px auto;
+    padding:0;
+}
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  width: 160px;
+  padding: 8px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  border-right-width: 2px;
+  border-bottom-width: 2px;
+    }
+
+
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 15px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 32px;
+    color: #555555;
+    white-space: nowrap;
+}
+    .ui-state-hover, .ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #2980b9;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+    }
+.badge-success { 
+background: #2ecc71;!important
+}
+.badge-error {
+background: #c0392b; !important
+}
+.badge-warning {
+background: #f1c40f; !important
+}

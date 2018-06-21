@@ -70,27 +70,12 @@ class RegisterController extends Controller
       'email'    => $data['email'],
       'password' => bcrypt($data['password']),
     ]);
-    $the_role = 'employee';
+    $the_role = 'customer';
     $user
        ->roles()
        ->attach(Role::where('name', $the_role)->first());
 
     return $user;
 }
-protected function create_in(array $data)
-{
-    print_r($data);
-    // $user = User::create([
-    //   'name'     => $data['name'],
-    //   'email'    => $data['email'],
-    //   'password' => bcrypt($data['password']),
-    // ]);
-    // $the_role = 'employee';
-    // $user
-    //    ->roles()
-    //    ->attach(Role::where('name', $the_role)->first());
 
-    // return $user;
-
-}
 }

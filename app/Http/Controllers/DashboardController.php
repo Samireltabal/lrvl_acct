@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 use DB;
 use Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use App\Mail\passwordChanged;
 use App\Role;
 use App\User;
 use App\Suppliers;
 use App\Categories;
 use App\Products;
+use Artisan;
 use App\logs;
 use App\invoices;
-use app\items;
+use App\tasks;
+use App\items;
+use App\options;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -25,83 +29,42 @@ class DashboardController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-      $this->middleware('auth');
-    }
   
     public function index(Request $request)
     {
       $users = User::all();
       $the_users = new User;
-      $products = Products::all();
-     if ($request->user()->authorizeRoles(['manager']) !== false) {
+      //$products = Products::all();
         return view('admin.content.main')->with(compact('users','products','the_users'));
-     }
-     else{
-         return redirect('/');
-     }
     }
     public function roles(Request $request) {
-      if ($request->user()->authorizeRoles(['manager']) !== false) {
+      
         $role = new Role;
         $roles = $role::all();
         return view('members.roles')->with('roles',$roles);
-     }
-     else{
-         return redirect('/');
-     }
+    
     }
     public function members(Request $request) {
-      if ($request->user()->authorizeRoles(['manager']) !== false) {
+     
         $user = new User;
+        $available_roles = Role::all();
         $users = $user::paginate(5);;
-        return view('admin.content.members.users')->with('users',$users);
-     }
-     else{
-         return redirect('/');
-     }
+        return view('admin.content.members.users')->with(compact(['users','available_roles']));
+
+    }
+    public function view($user_id) {
+      $user = User::find($user_id);
+      $task = new tasks;
+      return view('admin.content.members.single')->with(compact(['user','task']));
     }
     public function create(Request $request) {
-      if ($request->user()->authorizeRoles(['manager']) !== false) {
+      
         $role = new Role;
         $roles = $role::all();
         return view('admin.content.members.form')->with('roles',$roles);
-      }else{
-        return redirect('/');
-      }
+      
     }
-    public function suppliers() {
-      $suppliers = new Suppliers;
-      return $suppliers::all();
-    }
-    public function categories() {
-      $categories = new Categories;
-      return $categories::all();
-    }
-    public function category($id) {
-      $Categories = new Categories;
-      $category = $Categories::find($id);
-      return $category->products()->get();
-    }
-    public function products() {
-      $products = new Products;
-      return $products::all();
-    }
-    public function supplier($id) {
-      $Suppliers = new Suppliers;
-      $Supplier = $Suppliers::find($id);
-      return $Supplier->products()->get();
-    }
-    public function invoices() {
-      $invoices = new Invoices;
-      return $invoices::all(); 
-    }
-    public function invoice($id) {
-      $invoices = new Invoices;
-      $invoice = $invoices::find($id);
-      return $invoice->items()->get();
-    }
+    
     /** 
      * Profile   /profile
      * Settings  /settings
@@ -171,8 +134,13 @@ class DashboardController extends Controller
             // END                       
             return redirect('profile')->with('success','passwrod Updated Successfully');   
         }
-    public function settings() {
-
+    public function settings()
+    {
+      $options = new options;
+      return view('admin.content.options')->with('options',$options);
+    }
+    public function backup(){
+      return view('admin.content.backup');
     }
    
     /*

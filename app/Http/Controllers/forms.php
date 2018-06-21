@@ -2,42 +2,52 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\RoleUser;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Logs;
 use App\Role;
+use App\options;
+
 class forms extends Controller
 {
-    public function __construct()
-    {
-      $this->middleware('auth');
-    }
+   
     public function change_role(request $request) {
-        if ($request->user()->authorizeRoles(['manager']) == false){
-            return rediret('/')->with('error','unauthorised page');
-          }
+        
         $id = $request->input('id');
         $role = $request->input('role');
         if(Auth::user()->id == $id){
             return redirect('/Dashboard/members')->with('error','You cannot change your role');
         }
         else{
-            $role == 1 ? $new_role = 2 : $new_role = 1;
                 // echo $new_role;
                 DB::table('role_user')
                     ->where('user_id', $id)
-                    ->update(['role_id' => $new_role]);
+                    ->update(['role_id' => $role]);
             return redirect('/Dashboard/members')->with('success','Role Changed Successfully');
         }
         
     }
+    public function create_role(request $request) {
+        
+        $this->validate($request, [
+            'name' => 'required|string|max:100|unique:roles',
+            'description' => 'required|string|max:1000'
+        ]);
+
+        $role = new Role;
+        $role->name = $request->input('name');
+        $role->description = $request->input('description');
+        $role->save();
+
+        return redirect('/Dashboard/roles')->with('success','Role Added Successfully');
+    }
     public function destroy(request $request, $id)
     {
-        if ($request->user()->authorizeRoles(['manager']) == false){
-            return rediret('/')->with('error','unauthorised page');
-          }
+
           if(Auth::user()->id == $id){
             return redirect('/Dashboard/members')->with('error','You cannot delete yourself');
         }else{
@@ -49,9 +59,6 @@ class forms extends Controller
         
     public function storeUser(Request $request)
     {
-        if ($request->user()->authorizeRoles(['manager']) == false){
-            return rediret('/')->with('error','unauthorised page');
-          }
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -71,6 +78,62 @@ class forms extends Controller
       
           return redirect('Dashboard/members');
     }
+    public function uploadPhoto(Request $request) {
+            $old_image = Auth::user()->image;          
+            Storage::delete('app/public/'.$old_image);
+            $file = Input::file('image');
 
+            $fileNameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extention = $file->getClientOriginalExtension();
+            $FileNameToStore = $filename.'_'.time().'.'.$extention;
+            $destinationPath ="storage";
+            $file->move($destinationPath, $FileNameToStore);
+
+            $user = Auth::user()->id ;  
+
+            $the_user = User::find($user);
+            $the_user->image = $FileNameToStore;
+            $the_user->save();
+            $log = new logs;
+            $log->users_id = $the_user->id;
+              $log->activity = "<i class='fa fa-hashtag'></i> $the_user->id  $the_user->name Changed His Profile Picture" ;
+              $log->save();   
+
+            return redirect('/profile')->with('success','Photo Changed Successfully');
+    }
+    // Settings forms
+    public function createOption(Request $request) {
+        
+        $this->validate($request, [
+            'option' => 'required|string|max:255|unique:options',
+            'value' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
+        $options = new options;
+        $options->option = $request['option'];
+        $options->value = $request['value'];
+        $options->description = $request['description'];
+        $options->save();
+
+        return redirect('/settings')->with('success','Option Added Successfully');
+    }
+
+    public function updateOption(Request $request) {
+        if ($request->user()->authorizeRoles(['manager']) == false){
+            return rediret('/')->with('error','unauthorised page');
+          }
+        $this->validate($request, [
+            'value' => 'required|string|max:255'
+        ]);
+        $id = $request['option_id'];
+        DB::table('options')
+                    ->where('id', $id)
+                    ->update([ 'value' => $request['value'] ]);
+       
+        return redirect('/settings')->with('success','Option Updated Successfully');
+
+
+    }
     
 }

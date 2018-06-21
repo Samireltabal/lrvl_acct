@@ -2,8 +2,6 @@
 
 @section('content')
 
-@include('inc.messages')
-
         <!-- page content -->
         <div class="right_col" role="main">
             <div class="">
@@ -22,8 +20,32 @@
                   <div class="x_panel">
                     <div class="x_content">
                       <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                    
-                        <h3>{{ $user->name }}</h3>
+                        <!-- menu profile quick info -->
+      <div class="profile clearfix">
+            <img src="
+            @if(Auth::user()->image !== null)
+            {{Storage::url(Auth::user()->image)}}
+            @else
+            {{ asset('bower_components/gentelella/production/images/user.png') }}
+            @endif
+            " alt="{{ Auth::user()->name }}" class="img-circle profile_img">
+            
+            {{ Form::open(array('url' => 'uploadPhoto', 'method' => 'post' , 'enctype' => 'multipart/form-data' )) }}
+
+            
+            
+            <label class='fileUpload' for="file"><strong>Change picture</strong></label>    
+            <input type="file" name="image" id="file" class="inputfile auto_submit_item"/>
+
+        </form>
+        <script>
+        $(".auto_submit_item").change(function() {
+            $(this).parents("form").submit();
+        });
+        </script>
+          </div>
+          <!-- /menu profile quick info -->
+                        <h3>{{ Auth::user()->name }}</h3>
   
                         <ul class="list-unstyled user_data">
                           <li><i class="fa fa-calendar user-profile-icon"></i> {{ $user->created_at }}

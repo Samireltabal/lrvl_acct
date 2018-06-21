@@ -7,14 +7,18 @@
     <ul class="nav navbar-nav navbar-right">
       <li class="">
         <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-          <img src="{{ asset('bower_components/gentelella/production/images/user.png') }}" alt=""> {{ Auth::user()->name }}
+          <img src="@if(Auth::user()->image !== null)
+          {{Storage::url(Auth::user()->image)}}
+          @else
+          {{ asset('bower_components/gentelella/production/images/user.png') }}
+          @endif" alt=""> {{ Auth::user()->name }}
           <span class=" fa fa-angle-down"></span>
         </a>
         <ul class="dropdown-menu dropdown-usermenu pull-right">
           <li><a href="{{ route('profile') }}"> {{ __('Profile') }}</a></li>
-          <li>
-            <li><a href="{{ route('settings') }}"> {{ __('Settings') }}</a></li>
-          </li>
+          @if (Session::get('admin', 1))
+          <li><a href="{{ route('settings') }}"> {{ __('Settings') }}</a></li>
+          @endif
           <li><a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();
                           document.getElementById('logout-form').submit();">

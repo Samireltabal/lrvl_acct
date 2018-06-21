@@ -7,13 +7,12 @@
                             {{ session('status') }}
                         </div>
         @endif
-        
-        @include('inc.messages')
-                        
+                                
                 <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <td>Id</td>
+                                <td>photo</td>
                                 <td>Name</td>
                                 <td>Email</td>
                                 <td>Created At </td>
@@ -26,9 +25,18 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td>{{$user->id}}</td>
+                                    <td>
+                                        <img src="
+                                        @if($user->image !== null)
+                                        {{Storage::url($user->image)}}
+                                        @else
+                                        {{ asset('bower_components/gentelella/production/images/user.png') }}
+                                        @endif
+                                        " alt="{{ Auth::user()->name }}" class="img-circle table-img">
+                                    </td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->created_at}}</td>                                    
+                                    <td><i class='fa fa-calendar-o'></i> {{$user->created_at->year}}-{{$user->created_at->month}}-{{$user->created_at->day}} <i class='fa fa-clock-o'></i> {{ $user->created_at->hour}}:{{$user->created_at->minute}}</td>                                    
                                     
                                         <?php $role = $user->roles; ?>
                                         @if(count($role) > 0) 
@@ -41,9 +49,14 @@
                                                 $role_id = $role->id;
                                                   ?>
                                             {!! Form::open(['action' => 'forms@change_role', 'method' => 'POST' , 'Class' => 'float-right']) !!}
-                                        {{form::hidden('id', $user_id )}}
-                                        {{form::hidden('role', $role_id )}}
-                                        {{Form::Submit('Change Role',['class' => 'btn btn-warning mx-auto'])}}
+                                            {{form::hidden('id', $user_id )}}
+                                            <select name='role' class='form-control' onchange="this.form.submit()">
+                                                @foreach($available_roles as $the_role)
+                                                    <option value='{{ $the_role->id }}' @if( $role->id == $the_role->id )
+                                                        selected
+                                                        @endif> {{ $the_role->name }}</option>
+                                                @endforeach
+                                            </select>
                                         {!! Form::close() !!} 
                                         </td>
                                         

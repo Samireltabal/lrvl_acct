@@ -73,7 +73,7 @@
                     
                     @auth
                         <a href="{{ url('/Dashboard') }}">Home</a>
-                        <a href="{{ url('/restricted') }}">restricted</a>
+                        <a href="{{ url('/profile') }}">restricted</a>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -98,7 +98,7 @@
                 @endif
                 <div class="title m-b-md">
                     @if(Auth::check())
-                    Hello {{ Auth::user()->name }}  
+                    Hello {{ Auth::user()->name }} 
                     @else
                     Laravel
                     @endif
