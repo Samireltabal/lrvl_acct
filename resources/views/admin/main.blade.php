@@ -7,33 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('bower_componenets/gentelella/production/images/favicon.ico') }}" type="image/ico" />
-
+    <!-- title -->
     <title>{{ get_option('app_name') }} | {{ request()->route()->getAction('as') }}</title>
-
-    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('bower_components/gentelella/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
-           <!-- NProgress -->
-    <link href="{{ asset('bower_components/gentelella/vendors/nprogress/nprogress.css') }}" rel="stylesheet">
-            <!-- iCheck -->
-    <link href="{{ asset('bower_components/gentelella/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
-        <!-- bootstrap-progressbar -->
-    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
-        <!-- JQVMap -->
-    <link href="{{ asset('bower_components/gentelella/vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
-        <!-- bootstrap-daterangepicker -->
-    <link href="{{ asset('bower_components/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
-        
-    <link href="{{ asset('bower_components/izitoast/dist/css/iziToast.min.css') }}" rel="stylesheet">
-      <!-- Custom Theme Style -->
-    <link href="{{ asset('bower_components/gentelella/build/css/custom.min.css') }}" rel="stylesheet">
-        <!-- Carrot Custem CSS -->
-        <!-- Jquery ui-->
-    <link href="{{ asset('bower_components/jquery-ui/themes/base/all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/myapp.css') }}" rel="stylesheet">
-
-     <!-- JQuery -->
-     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
+    <!-- styles -->
+    <link rel="stylesheet" href="{{ asset('bower_components/jquery-ui/themes/smoothness/jquery-ui.css') }}" />
+        <link href="{{asset('css/all.css')}}" rel="stylesheet" type="text/css">
 
   </head>
   <body class="nav-md">
@@ -77,43 +55,68 @@
         <!-- /footer content -->
       </div>
     </div>
-               <!-- Bootstrap -->
-    <script src="{{ asset('bower_components/gentelella/vendors/bootstrap/dist/js/bootstrap.min.js') }}" defer></script>
-        <!-- FastClick -->
-    <script src="{{ asset('bower_components/gentelella/vendors/fastclick/lib/fastclick.js') }}" defer></script>
-        <!-- NProgress -->
-    <script src="{{ asset('bower_components/gentelella/vendors/nprogress/nprogress.js') }}" defer></script>
-        <!-- Charts  -->
-    <script src="{{ asset('bower_components/gentelella/vendors/Chart.js/dist/Chart.min.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/gauge.js/dist/gauge.min.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/iCheck/icheck.min.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/skycons/skycons.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/jqvmap/dist/jquery.vmap.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/flot.orderbars/js/jquery.flot.orderBars.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/flot-spline/js/jquery.flot.spline.min.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/flot.curvedlines/curvedLines.js') }}" defer></script>
-    {{-- <script src="{{ asset('bower_components/gentelella/vendors/Flot/jquery.flot.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/Flot/jquery.flot.pie.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/Flot/jquery.flot.time.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/Flot/jquery.flot.stack.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/Flot/jquery.flot.resize.js') }}" defer></script>
-        {{-- JQVMap --}}
-    <script src="{{ asset('bower_components/gentelella/vendors/jqvmap/dist/jquery.vmap.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js') }}" defer></script> --}}
-        <!-- DateJS -->
-    <script src="{{ asset('bower_components/gentelella/vendors/DateJS/build/date.js') }}" defer></script>
 
-        <!-- bootstrap-daterangepicker -->
-    <script src="{{ asset('bower_components/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.js') }}" defer></script>
-    <script src="{{ asset('bower_components/gentelella/vendors/moment/min/moment.min.js') }}" defer></script>
-    <!-- Custom Theme Scripts -->
-    <script src="{{ asset('bower_components/gentelella/build/js/custom.js') }}" defer></script>
-     <script src="{{ asset('bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/jquery-ui.js') }}"></script>
+               <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
 
-    <script src="{{ asset('bower_components/izitoast/dist/js/iziToast.min.js') }}" defer></script>    
-    <!-- Custom Theme Scripts -->
-  <script type="text/javascript" src="{{ asset('js/myapp.js')}}"></script>
+<script type="text/javascript">
+
+$( "#datepicker" ).datepicker();
+
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+<script type="text/javascript">
+$('#developer_name').each(function() {
+        var $this = $(this);
+        var src = $this.data('action');
+
+        $this.autocomplete({
+            source: src,
+            minLength: 2,
+            select: function(event, ui) {
+                $this.val(ui.item.name);
+                $('#developer_id').val(ui.item.id);
+            }
+        });
+    });  
+
+</script>
   </body>
 </html>

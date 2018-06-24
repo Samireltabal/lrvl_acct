@@ -32,6 +32,8 @@ Route::group(['middleware' => 'employee' ], function () {
     // Restricted Frontend
     Route::get('/Dashboard', 'DashboardController@index')->name('Dashboard');
         Route::get('/api/users','api@users')->name('users');
+            Route::post('closeTask' , 'TasksController@changeState')->name('closeTask');
+
 
 
 
@@ -54,6 +56,11 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('add_role','forms@create_role')->name('add_role');
     // List Backups 
     Route::get('backup','DashboardController@backup')->name('backup');
+    
+    // Tasks Forms
+    Route::post('storeTask' , 'TasksController@createTask')->name('storeTask');
+    
+
     // Porjects Route
     Route::group(['prefix' => 'projects' , 'as' => 'projects'], function() {
         
@@ -64,8 +71,8 @@ Route::group(['middleware' => 'admin'], function () {
         route::post('store','projectsController@store')->name('store');
 
         Route::group(['prefix' => 'task' , 'as' => 'task'], function() {
-            route::get('/' , 'tasksController@list');   
-            route::get('/{p_id}' , 'tasksController@index')->name('task');
+            // route::get('/' , 'tasksController@list');   
+            // route::get('/{p_id}' , 'tasksController@index')->name('task');
         });
     });
     
@@ -74,5 +81,5 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('testMail',function(){
         return view('emails.password');
     });
-    Route::get('search', 'searchAutocomplete@view');
+    //Route::get('search', 'searchAutocomplete@view');
 });

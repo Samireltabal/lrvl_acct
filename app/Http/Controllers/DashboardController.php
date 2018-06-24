@@ -16,6 +16,7 @@ use App\Products;
 use Artisan;
 use App\logs;
 use App\invoices;
+use App\projects;
 use App\tasks;
 use App\items;
 use App\options;
@@ -32,10 +33,31 @@ class DashboardController extends Controller
   
     public function index(Request $request)
     {
+      // Users Objects
       $users = User::all();
       $the_users = new User;
-      //$products = Products::all();
-        return view('admin.content.main')->with(compact('users','products','the_users'));
+      // Tasks Variables
+      $tasksCount = tasks::where('status','1')->count();
+      $totalTasks = count(tasks::all());
+      $completedTasks = tasks::where('status','0')->count();
+      $tasksPercentage = round($completedTasks / $totalTasks * 100,2) ; 
+      // projects 
+      $projectsCount = projects::where('status','1')->count();
+      $totalprojects = count(projects::all());
+      $completedprojects = projects::where('status','0')->count();
+      $projectsPercentage = round($completedprojects / $totalprojects * 100,2) ; 
+
+      $projectsData = array(
+        'active' => $projectsCount,
+        'completed' => $completedprojects,
+        'percentage' => $projectsPercentage,
+        'totalprojects' => $totalprojects
+      );
+
+      $passed_variables = array(
+        'users','products','the_users','tasksCount','tasksPercentage','projectsData'
+      );
+        return view('admin.content.main')->with(compact($passed_variables));
     }
     public function roles(Request $request) {
       

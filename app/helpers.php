@@ -1,5 +1,28 @@
 <?php 
 use App\options;
+use GuzzleHttp\Client;
+// Github Apis Handling
+function get_repo_url($repo_name = null) {
+    if(isset($repo_name)){
+          $client = new Client;
+          $response = $client->request('GET', 'https://api.github.com/repos/'.$repo_name);
+          $products = json_decode($response->getBody());
+          echo '<a href="' . $products->html_url . '" target="_blank" ><i class="fa fa-link"></i> ' . $products->name . '</a>';
+    }else{
+        echo "No Repo Attached";
+    }
+}
+function get_repo_description($repo_name = null) {
+    if(isset($repo_name)){
+          $client = new Client;
+          $response = $client->request('GET', 'https://api.github.com/repos/'.$repo_name);
+          $products = json_decode($response->getBody());
+          echo $products->description;
+    }else{
+        echo "No Repo Attached";
+    }
+}
+//  End Github
 function print_hello() {
     $options = new options;
     $return = $options::all();

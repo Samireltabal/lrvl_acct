@@ -6,6 +6,9 @@
             <div class="title_left">
             <h1>@yield('page_title')</h1>
             </div>
+            <div class="title_right">
+                @yield('buttons')
+            </div>
         </div>
         <div class="clearfix"></div>
         <div class="row">

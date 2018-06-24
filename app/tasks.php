@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class tasks extends Model
 {
     //
+    public $timestamps = true;
     public function project()
     {
         return $this->belongsTo('App\projects','projects_id');
