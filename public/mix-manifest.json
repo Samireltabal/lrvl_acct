@@ -1,4 +1,6 @@
 {
     "/js/all.js": "/js/all.js",
-    "/css/all.css": "/css/all.css"
+    "/js/jquerybundle.js": "/js/jquerybundle.js",
+    "/css/all.css": "/css/all.css",
+    "/css/pdf.css": "/css/pdf.css"
 }

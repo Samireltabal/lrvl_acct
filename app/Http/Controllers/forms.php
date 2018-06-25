@@ -113,6 +113,7 @@ class forms extends Controller
         $options = new options;
         $options->option = $request['option'];
         $options->value = $request['value'];
+        $options->type = $request['type'];
         $options->description = $request['description'];
         $options->save();
 
@@ -123,9 +124,13 @@ class forms extends Controller
         if ($request->user()->authorizeRoles(['manager']) == false){
             return rediret('/')->with('error','unauthorised page');
           }
+        if( !empty($request['value']) ) {
         $this->validate($request, [
             'value' => 'required|string|max:255'
-        ]);
+            ]);
+        }else{
+            $request['value'] = 'off';
+        }
         $id = $request['option_id'];
         DB::table('options')
                     ->where('id', $id)
@@ -133,7 +138,7 @@ class forms extends Controller
        
         return redirect('/settings')->with('success','Option Updated Successfully');
 
-
+        
     }
     
 }

@@ -27,6 +27,16 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="type" class="col-md-4 col-form-label text-md-right">{{ __('Option value') }}</label>
+
+        <div class="col-md-6">
+            <select class='form-control' name='type'>
+                <option value='text'>Text</option>
+                <option value='checkbox'>Check Box</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="description" class="col-md-4 col-form-label text-md-right">{{ __('Option Description') }}</label>
 
         <div class="col-md-6">

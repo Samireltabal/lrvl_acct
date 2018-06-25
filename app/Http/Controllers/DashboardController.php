@@ -46,6 +46,9 @@ class DashboardController extends Controller
       $totalprojects = count(projects::all());
       $completedprojects = projects::where('status','0')->count();
       $projectsPercentage = round($completedprojects / $totalprojects * 100,2) ; 
+      // Customers stats 
+      $customers_count = Role::where('name', 'customer')->first()->users()->count();
+      $employees_count = Role::where('name', 'employee')->first()->users()->count();
 
       $projectsData = array(
         'active' => $projectsCount,
@@ -53,11 +56,33 @@ class DashboardController extends Controller
         'percentage' => $projectsPercentage,
         'totalprojects' => $totalprojects
       );
-
-      $passed_variables = array(
-        'users','products','the_users','tasksCount','tasksPercentage','projectsData'
+      $currentMonth = date('F');
+      $main_graph = array(
+        date("F", strtotime ( '-7 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-6 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-5 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-4 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-3 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-2 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '-1 month' , strtotime ( $currentMonth ) )),
+        date("F", strtotime ( '0 month' , strtotime ( $currentMonth ) )),
       );
-        return view('admin.content.main')->with(compact($passed_variables));
+      $main_graph_values = array(
+        projects::whereMonth('created_at' , date('m') - 7)->count(),
+        projects::whereMonth('created_at' , date('m') - 6)->count(),
+        projects::whereMonth('created_at' , date('m') - 5)->count(),
+        projects::whereMonth('created_at' , date('m') - 4)->count(),
+        projects::whereMonth('created_at' , date('m') - 3)->count(),
+        projects::whereMonth('created_at' , date('m') - 2)->count(),
+        projects::whereMonth('created_at' , date('m') - 1)->count(),
+        projects::whereMonth('created_at' , date('m'))->count()
+      );
+      $passed_variables = array(
+        'users','products','the_users','tasksCount','tasksPercentage','projectsData','customers_count','employees_count','main_graph','main_graph_values'
+      );
+      return view('admin.content.main')->with(compact($passed_variables));
+
+      // return $main_graph_values;
     }
     public function roles(Request $request) {
       
@@ -164,7 +189,7 @@ class DashboardController extends Controller
     public function backup(){
       return view('admin.content.backup');
     }
-   
+ 
     /*
     public function someAdminStuff(Request $request)
     {

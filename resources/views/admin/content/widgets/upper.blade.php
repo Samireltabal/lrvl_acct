@@ -1,13 +1,13 @@
 <div class="row tile_count">
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-user"></i> Total Users</span>
-        <div class="count">{{ $users->count() }}</div>
+        <span class="count_top"><i class="fa fa-user"></i> Total Customers</span>
+        <div class="count">{{ $customers_count }}</div>
       <span class="count_bottom"><i class="green">Latest :</i> {{ $users->last()->name }}</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-        <span class="count_top"><i class="fa fa-clock-o"></i> Products</span>
-        <div class="count"> 500 </div>
-        <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+        <span class="count_top"><i class="fa fa-user"></i> Total Employees</span>
+        <div class="count">{{ $employees_count }}</div>
+      <span class="count_bottom"></span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-folder"></i> Active projects</span>

@@ -28,6 +28,11 @@ mix.combine([
 	'public/bower_components/izitoast/dist/js/iziToast.min.js',
 	'public/js/myapp.js'
 	], 'public/js/all.js')
+mix.combine([
+	'public/js/jquery.min.js',
+	'public/bower_components/jquery-ui/jquery-ui.js'
+	]
+	,'public/js/jquerybundle.js')
    
    mix.styles([
     'public/bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.css',

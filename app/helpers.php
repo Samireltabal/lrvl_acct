@@ -45,6 +45,23 @@ function get_option(string $key = null) {
         }
     }
 }
+function get_checkbox(string $key = null) {
+    if($key == null) {
+                return 'Error : No Key assigned';
+         }else{
+            $options = new options;    
+            if ( $options::where('option',$key)->exists() ) {
+                $option = $options::where('option',$key)->first();
+            if( $option->value == 'on'){
+                return true;
+            }else{
+                return false;
+            }
+        }else{
+            return 'key is not defined';
+        }
+    }
+}
 function get_option_desc(string $key = null) {
     if($key == null) {
         return 'Error : No Key assigned';

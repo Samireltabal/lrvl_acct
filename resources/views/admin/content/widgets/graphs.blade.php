@@ -4,12 +4,12 @@
 
           <div class="row x_title">
             <div class="col-md-6">
-              <h3>Network Activities <small>Graph title sub-title</small></h3>
+              <h3>Projects Statistics<small> Projects / Month</small></h3>
             </div>
             <div class="col-md-6">
-              <div id="reportrange" id='datepicker' class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc">
+              <div  class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px">
                 <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
-                <span>December 30, 2014 - January 28, 2015</span> <b class="caret"></b>
+                <span>{{ $main_graph[0] }} - {{ $main_graph[7] }}</span> 
               </div>
             </div>
           </div>

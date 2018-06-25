@@ -56,29 +56,36 @@
       </div>
     </div>
 
-                <script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-                <script type="text/javascript" src="{{ asset('bower_components/jquery-ui/jquery-ui.js') }}"></script>
+                <script type="text/javascript" src="{{ asset('js/jquerybundle.js') }}"></script>
                <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
 
+@if( ! empty($main_graph) )
 <script type="text/javascript">
-
 $( "#datepicker" ).datepicker();
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: [ @foreach($main_graph as $value)
+                    "{{ $value }}" ,
+                @endforeach ],
         datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            label: 'Projects Rate',
+            data: [ 
+                @foreach($main_graph_values as $value)
+                    '{{ $value }}' ,
+                @endforeach
+             ],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
                 'rgba(255, 206, 86, 0.2)',
                 'rgba(75, 192, 192, 0.2)',
                 'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
+                'rgba(255, 159, 64, 0.2)',
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
             ],
             borderColor: [
                 'rgba(255,99,132,1)',
@@ -86,7 +93,9 @@ var myChart = new Chart(ctx, {
                 'rgba(255, 206, 86, 1)',
                 'rgba(75, 192, 192, 1)',
                 'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
+                'rgba(255, 159, 64, 1)',
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
             ],
             borderWidth: 1
         }]
@@ -101,7 +110,12 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+if ($(".progress .progress-bar")[0]) {
+    $('.progress .progress-bar').progressbar();
+}
 </script>
+@endif
 <script type="text/javascript">
 $('#developer_name').each(function() {
         var $this = $(this);
