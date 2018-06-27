@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use App\RoleUser;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +13,7 @@ use App\User;
 use App\Logs;
 use App\Role;
 use App\options;
+use App\attachments;
 
 class forms extends Controller
 {
@@ -52,6 +55,8 @@ class forms extends Controller
             return redirect('/Dashboard/members')->with('error','You cannot delete yourself');
         }else{
             $user = User::find($id);
+            Storage::delete('public/'. $user->image );
+
             $user->delete();
             return redirect('/Dashboard/members')->with('success','Member Removed');
         } 
@@ -101,6 +106,54 @@ class forms extends Controller
               $log->save();   
 
             return redirect('/profile')->with('success','Photo Changed Successfully');
+    }
+    public function uploadAttachment(Request $request) {
+            $file = Input::file('file');
+            $user = $request->input('user_id');
+            $project = $request->input('project_id');
+            $fileNameWithExt = $file->getClientOriginalName();
+            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+            $extention = $file->getClientOriginalExtension();
+            $FileNameToStore = $filename.'_'.time().'.'.$extention;
+            $destinationPath ="storage/projectsUploads";
+            $file->move($destinationPath, $FileNameToStore);
+
+            $attachment = new attachments;
+            $attachment->file_name = $FileNameToStore;
+            $attachment->extention = $extention;
+            $attachment->users_id = $user ;
+            $attachment->projects_id = $project;
+            $attachment->status = 1;
+            $attachment->save();         
+            
+            $log = new logs;
+            $log->users_id = $user;
+            $log->activity = "Attachment Uploaded To project # $project" ;
+            $log->save();   
+
+            return 'Success';
+
+    }
+    
+    public function removeAttachment(Request $request) {
+            $attachment_id = $request->input('attachment_id');
+            $attachment_name = $request->input('file_name');
+            $user = $request->input('user_id');
+            $project = $request->input('project_id');
+
+            Storage::delete('public/projectsUploads/'.$attachment_name);
+
+            $delete = attachments::findOrFail($attachment_id)->delete();   
+            
+            $log = new logs;
+            $log->users_id = $user;
+            $log->activity = "Attachment Removed from project # $project" ;
+            $log->save();   
+
+            return Redirect::back()->with('error',"Attachment Deleted Successfully");
+
+        
+
     }
     // Settings forms
     public function createOption(Request $request) {

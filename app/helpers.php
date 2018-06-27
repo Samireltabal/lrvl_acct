@@ -22,6 +22,32 @@ function get_repo_description($repo_name = null) {
         echo "No Repo Attached";
     }
 }
+function get_repo_obj($repo_name = null){
+    if(isset($repo_name)){
+          $client = new Client;
+          $response = $client->request('GET', 'https://api.github.com/repos/'.$repo_name);
+          $body = json_decode($response->getBody());
+          return $body;
+    }else{
+        echo "No Repo Attached";
+    }
+}
+function get_repo_data($repo_name = null , $data = null) {
+    if(isset($repo_name)){
+          $client = new Client;
+          $response = $client->request('GET', 'https://api.github.com/repos/'.$repo_name.'/'.$data);
+          $data = json_decode($response->getBody());
+          return $data;
+    }else{
+        echo "No Repo Attached";
+    }
+}
+function get_commit_url($url) {
+        $client = new Client;
+          $response = $client->request('GET', $url );
+          $data = json_decode($response->getBody());
+          return $data->html_url ;
+}
 //  End Github
 function print_hello() {
     $options = new options;

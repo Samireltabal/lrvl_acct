@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Redirect;
 class isEmployee
 {
     /**
@@ -19,7 +20,6 @@ class isEmployee
                     return $next($request);
             }
 
-            return redirect('/');
-        return $next($request);
+        return Redirect::back()->with('error','You are not authorised to view this page');
     }
 }

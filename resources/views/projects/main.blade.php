@@ -1,7 +1,7 @@
 @extends('admin.main')
 
 @section('content')
-		<div class="right_col" role="main">
+		<div class="right_col" role="main" id="printable">
 	<div class="page-title">
             <div class="title_left">
             <h1>@yield('page_title')</h1>

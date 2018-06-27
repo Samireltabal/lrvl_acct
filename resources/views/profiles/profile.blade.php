@@ -38,23 +38,19 @@
             <input type="file" name="image" id="file" class="inputfile auto_submit_item"/>
 
         </form>
-        <script>
-        $(".auto_submit_item").change(function() {
-            $(this).parents("form").submit();
-        });
-        </script>
+       
           </div>
           <!-- /menu profile quick info -->
                         <h3>{{ Auth::user()->name }}</h3>
   
                         <ul class="list-unstyled user_data">
-                          <li><i class="fa fa-calendar user-profile-icon"></i> {{ $user->created_at }}
+                          <li><i class="fa fa-calendar user-profile-icon"></i> {{ Auth::user()->created_at }}
                           </li>
   
                           <li>
                             <i class="fa fa-briefcase user-profile-icon"></i> 
                             
-                            <?php $role = $user->roles; ?>
+                            <?php $role = Auth::user()->roles; ?>
                                         @if(count($role) > 0) 
 
                                         @foreach($role as $role)
@@ -113,95 +109,15 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="edit-tab">
   
-                                {{ Form::open(array('url' => 'editUser', 'method' => 'post')) }}
+                                @include('profiles.data')
 
-                        @csrf
-                            <input type="hidden" name='id' value='{{ Auth::user()->id }}'>
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                             <hr>
+                   
+                                @include('profiles.password')
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ Auth::user()->name }}" required autofocus>
+                              <hr>
 
-                                @if ($errors->has('name'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ Auth::user()->email }}" required>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Update') }}
-                                </button>
-                            </div>
-                        </div>
-
-                    </form>
-
-                    <hr>
-                    {{ Form::open(array('url' => 'updatePassword', 'method' => 'post')) }}
-
-                    @csrf
-                        <input type="hidden" name='id' value='{{ Auth::user()->id }}'>
-                        <div class="form-group row">
-                          <label for="oldPassword" class="col-md-4 col-form-label text-md-right">{{ __('Old Password') }}</label>
-
-                          <div class="col-md-6">
-                              <input id="oldPassword" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="oldPassword" >
-
-                              @if ($errors->has('password'))
-                                  <span class="invalid-feedback">
-                                      <strong>{{ $errors->first('password') }}</strong>
-                                  </span>
-                              @endif
-                          </div>
-                      </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" >
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation">
-                            </div>
-                        </div>
-                        <div class="form-group row mb-0">
-                          <div class="col-md-6 offset-md-4">
-                              <button type="submit" class="btn btn-primary">
-                                  {{ __('Update Password') }}
-                              </button>
-                          </div>
-                      </div>
-                      </form>
+                                @include('profiles.info')
 
                           </div>
                         </div>

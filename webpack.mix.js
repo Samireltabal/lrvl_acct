@@ -24,6 +24,7 @@ mix.combine([
 	'public/bower_components/gentelella/vendors/jqvmap/dist/jquery.vmap.js',
 	'public/bower_components/gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js',
 	'public/bower_components/gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js',
+	'public/bower_components/dropzone/dist/dropzone.js',
 	'node_modules/chart.js/dist/dist/Chart.bundle.min.js',
 	'public/bower_components/izitoast/dist/js/iziToast.min.js',
 	'public/js/myapp.js'
@@ -38,6 +39,7 @@ mix.combine([
     'public/bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.css',
     'public/bower_components/gentelella/vendors/font-awesome/css/font-awesome.min.css',
     'public/bower_components/gentelella/vendors/nprogress/nprogress.css',
+    'public/bower_components/gentelella/vendors/dropzone/dist/min/dropzone.min.css',
     'public/bower_components/gentelella/vendors/iCheck/skins/flat/green.css',
     'public/bower_components/gentelella/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css',
     'public/bower_components/gentelella/vendors/jqvmap/dist/jqvmap.min.css',

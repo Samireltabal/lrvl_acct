@@ -9,6 +9,7 @@
 @endsection
 
 @section('page_content')
+	<a href='/projects/create' class="btn btn-success pull-right"><i class='fa fa-plus-square'></i></a>
 	<table class='table table-striped projects'>
 		<thead>
 			<tr>
@@ -34,7 +35,12 @@
 							$tasks_completed_weight = DB::table('tasks')
 														->where([['projects_id' , '='  , $project->id ], [ 'status' , '=' , 0]])
 														->sum('weight');
+							if($tasks_total_weight !== 0)
+							{
 							$completion_rate = round($tasks_completed_weight / $tasks_total_weight * 100,0);
+							}else{
+							$completion_rate = "No Tasks Assigned";
+							}	
 						
 					 ?>
 					<td>{{ $project->id }}</td>
@@ -62,8 +68,7 @@
 					<td>
 					
                             <a href="/projects/id/{{ $project->id }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="/projects/id/{{ $project->id }}/delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
 				</tr>
 			@endforeach

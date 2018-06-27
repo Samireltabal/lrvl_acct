@@ -35,6 +35,12 @@
                 <li><a href="/"> {{ __('Website')}} </a></li>
               </ul>
             </li>
+            <li><a><i class="fa fa-folder"></i>Projects <span class="fa fa-chevron-down"></span></a>
+          <ul class="nav child_menu">
+            <li><a href="/projects">List Projects <span class="label label-warning pull-right">WIP</span></a></li>
+            <li><a href="/projects/create">Create Porject</a></li>
+          </ul>
+        </li>
           </ul>
           <!-- /menu footer buttons -->
           <div class="sidebar-footer hidden-small">

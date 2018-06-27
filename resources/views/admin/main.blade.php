@@ -11,11 +11,12 @@
     <title>{{ get_option('app_name') }} | {{ request()->route()->getAction('as') }}</title>
     <!-- styles -->
     <link rel="stylesheet" href="{{ asset('bower_components/jquery-ui/themes/smoothness/jquery-ui.css') }}" />
-        <link href="{{asset('css/all.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/all.css')}}" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="{{ asset('js/jquerybundle.js') }}"></script>
+
 
   </head>
   <body class="nav-md">
-        @include('inc.messages')
     <div class="container body">
       <div class="main_container">
         <!-- sidebar menu -->
@@ -56,12 +57,14 @@
       </div>
     </div>
 
-                <script type="text/javascript" src="{{ asset('js/jquerybundle.js') }}"></script>
+
                <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
+                        
+
+        @include('inc.messages')
 
 @if( ! empty($main_graph) )
 <script type="text/javascript">
-$( "#datepicker" ).datepicker();
 
 var ctx = document.getElementById("myChart");
 var myChart = new Chart(ctx, {
@@ -71,7 +74,7 @@ var myChart = new Chart(ctx, {
                     "{{ $value }}" ,
                 @endforeach ],
         datasets: [{
-            label: 'Projects Rate',
+            label: 'Projects Per Month',
             data: [ 
                 @foreach($main_graph_values as $value)
                     '{{ $value }}' ,
@@ -132,5 +135,38 @@ $('#developer_name').each(function() {
     });  
 
 </script>
+ <script>
+        $(".auto_submit_item").change(function() {
+            $(this).parents("form").submit();
+        });
+
+        $('#Edit').on('click',function(){
+        if($('#text').css('display')!='none'){
+             $('#form').show().siblings('#text').hide();
+             $('#Edit').hide();
+        }
+    else if($('#form').css('display')!='none'){
+        $('#Edit').show().siblings('#text').hide();
+         }
+        });
+
+
+        $('#Editgithub').on('click',function(){
+        if($('#github').css('display')!='none'){
+             $('#formgithub').show().siblings('#github').hide();
+             //$('#Editgithub').hide();
+        }
+    else if($('#form').css('display')!='none'){
+        $('#Editgithub').show().siblings('#github').hide();
+         }
+        });
+        $('#closeEditgithub').on('click', function(){
+            $('#formgithub').hide();
+            $('#Editgithub').show();
+            $('#github').show();
+        });
+        </script>
+        
+
   </body>
 </html>

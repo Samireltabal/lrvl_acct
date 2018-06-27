@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
+use Redirect;
 class IsAdmin
 {
     /**
@@ -19,6 +20,6 @@ class IsAdmin
                     return $next($request);
             }
 
-            return redirect('/');
+            return Redirect::back()->with('error','You are not authorised to view this page');
         }
 }

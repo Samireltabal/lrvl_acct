@@ -28,7 +28,6 @@ class passwordChanged extends Mailable
      */
     public function build()
     {
-        return $this->from('samir.m.eltabal@gmail.com')
-                    ->view('emails.password');
+        return $this->view('emails.password');
     }
 }

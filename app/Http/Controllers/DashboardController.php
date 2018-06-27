@@ -14,12 +14,15 @@ use App\Suppliers;
 use App\Categories;
 use App\Products;
 use Artisan;
+use Illuminate\Support\Facades\Redirect;
 use App\logs;
 use App\invoices;
 use App\projects;
 use App\tasks;
+use App\countriesList;
 use App\items;
 use App\options;
+use App\customerInfo;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -36,6 +39,7 @@ class DashboardController extends Controller
       // Users Objects
       $users = User::all();
       $the_users = new User;
+      $logs = logs::orderBy('created_at','desc')->take(5)->get();;
       // Tasks Variables
       $tasksCount = tasks::where('status','1')->count();
       $totalTasks = count(tasks::all());
@@ -78,7 +82,7 @@ class DashboardController extends Controller
         projects::whereMonth('created_at' , date('m'))->count()
       );
       $passed_variables = array(
-        'users','products','the_users','tasksCount','tasksPercentage','projectsData','customers_count','employees_count','main_graph','main_graph_values'
+        'users','products','the_users','tasksCount','tasksPercentage','projectsData','customers_count','employees_count','main_graph','main_graph_values','logs'
       );
       return view('admin.content.main')->with(compact($passed_variables));
 
@@ -122,7 +126,9 @@ class DashboardController extends Controller
       $user_id = Auth::user()->id;
       $log = logs::where('users_id',$user_id)->orderBy('id','desc')->paginate(5);
       $user = $users::find($user_id)->first();
-      return view('profiles.profile')->with(compact('user','log'));
+      $users_info = customerInfo::firstOrCreate(['user_id' => $user_id ], []);
+      $countries = countriesList::all();
+      return view('profiles.profile')->with(compact('user','log','countries','users_info'));
     }
 
     public function updateProfile(Request $request)
@@ -180,6 +186,21 @@ class DashboardController extends Controller
             }
             // END                       
             return redirect('profile')->with('success','passwrod Updated Successfully');   
+        }
+
+        public function add_customer_info(request $request) {
+            $user_id = $request->input('id');
+            $users_info = customerInfo::where('user_id' , $user_id)->first();
+            $users_info->name = $request->input('name');
+            $users_info->address = $request->input('address');
+            $users_info->city = $request->input('city');
+            $users_info->country = $request->input('country');
+            $users_info->birth = $request->input('birth');
+            $users_info->phone = $request->input('phone');
+            $users_info->website = $request->input('website');
+            $users_info->save();
+            
+      return Redirect::back()->with('success','Profile Information Updated Successfully');
         }
     public function settings()
     {

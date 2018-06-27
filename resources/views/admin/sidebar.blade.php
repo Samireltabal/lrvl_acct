@@ -53,10 +53,7 @@
         <li><a><i class="fa fa-folder"></i>Projects <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
             <li><a href="/projects">List Projects <span class="label label-warning pull-right">WIP</span></a></li>
-            <li><a href="/projects/active">Active Porjects</a></li>
             <li><a href="/projects/create">Create Porject</a></li>
-            <li><a href="/projects/task/create">Create Task</a></li>
-            <li><a href="/projects/tasks">Active Tasks</a></li>
           </ul>
         </li>
       </ul>

@@ -10,7 +10,7 @@
     <link href='https://fonts.googleapis.com/css?family=Quicksand:300,400,700' rel="stylesheet">
     <!-- <![endif]-->
 
-    <title>Bestore Email Template</title>
+    <title>Be Store</title>
 
     <style type="text/css">
         body {
@@ -168,7 +168,7 @@
 
                                 <tr>
                                     <td align="center" height="70" style="height:70px;">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="https://mdbootstrap.com/img/logo/mdb-email.png" alt="" /></a>
+                                        <a href="{{ url('/') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="100" border="0" style="display: block; width: 100px;" src="{{ get_option('logo') }}" alt="{{ get_option('app_name') }}" /></a>
                                     </td>
                                 </tr>
 
@@ -178,13 +178,13 @@
                                             class="container590 hide">
                                             <tr>
                                                 <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                    <a href="" style="color: #312c32; text-decoration: none;">MEN</a>
+                                                    <a href="{{ url('/products') }}" style="color: #312c32; text-decoration: none;">Products</a>
                                                 </td>
                                                 <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                    <a href="" style="color: #312c32; text-decoration: none;">WOMEN</a>
+                                                    <a href="{{ url('/services') }}" style="color: #312c32; text-decoration: none;">Services</a>
                                                 </td>
                                                 <td width="120" align="center" style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
-                                                    <a href="" style="color: #312c32; text-decoration: none;">BLOG</a>
+                                                    <a href="{{ url('/support') }}" style="color: #312c32; text-decoration: none;">Support</a>
                                                 </td>
                                             </tr>
                                         </table>
@@ -233,7 +233,7 @@
                                 <tr>
                                     <!-- logo -->
                                     <td align="left">
-                                        <a href="" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="https://mdbootstrap.com/img/logo/mdb-email.png" alt="" /></a>
+                                        <a href="{{ url('/') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="80" border="0" style="display: block; width: 80px;" src="{{ get_option('logo') }}" alt="{{ get_option('app_name') }}" /></a>
                                     </td>
                                 </tr>
 
@@ -246,7 +246,7 @@
                                         class="text_color">
                                         <div style="color: #333333; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; font-weight: 600; mso-line-height-rule: exactly; line-height: 23px;">
 
-                                            Email us: <br/> <a href="mailto:" style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">contact@mdbootstrap.com</a>
+                                            Email us: <br/> <a href="mailto:{{ get_option('company_mail') }}" style="color: #888888; font-size: 14px; font-family: 'Hind Siliguri', Calibri, Sans-serif; font-weight: 400;">{{ get_option('company_mail') }}</a>
 
                                         </div>
                                     </td>
@@ -279,16 +279,14 @@
                                         <table border="0" align="right" cellpadding="0" cellspacing="0">
                                             <tr>
                                                 <td>
-                                                    <a href="https://www.facebook.com/mdbootstrap" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/Qc3zTxn.png" alt=""></a>
+                                                    <a href="{{ get_option('twitter_url') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/Qc3zTxn.png" alt=""></a>
                                                 </td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                                 <td>
-                                                    <a href="https://twitter.com/MDBootstrap" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/RBRORq1.png" alt=""></a>
+                                                    <a href="{{ get_option('facebook_url') }}" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/RBRORq1.png" alt=""></a>
                                                 </td>
                                                 <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                                <td>
-                                                    <a href="https://plus.google.com/u/0/b/107863090883699620484/107863090883699620484/posts" style="display: block; border-style: none !important; border: 0 !important;"><img width="24" border="0" style="display: block;" src="http://i.imgur.com/Wji3af6.png" alt=""></a>
-                                                </td>
+                                                
                                             </tr>
                                         </table>
                                     </td>
@@ -328,7 +326,7 @@
                                     <td align="left" style="color: #aaaaaa; font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;">
                                         <div style="line-height: 24px;">
 
-                                            <span style="color: #333333;">Material Design for Bootstrap</span>
+                                            <span style="color: #333333;"><a style="text-decoration: none; color:#333;" href="{{ get_option('app_url') }}">{{ get_option('app_name') }}</a></span>
 
                                         </div>
                                     </td>
@@ -347,14 +345,7 @@
 
                                 <tr>
                                     <td align="center">
-                                        <table align="center" border="0" cellpadding="0" cellspacing="0">
-                                            <tr>
-                                                <td align="center">
-                                                    <a style="font-size: 14px; font-family: 'Work Sans', Calibri, sans-serif; line-height: 24px;color: #5caad2; text-decoration: none;font-weight:bold;"
-                                                        href="#">UNSUBSCRIBE</a>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                        {{ get_option('company_phone') }}
                                     </td>
                                 </tr>
 

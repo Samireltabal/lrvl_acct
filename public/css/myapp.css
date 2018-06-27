@@ -105,3 +105,12 @@ background: #c0392b; !important
 .badge-warning {
 background: #f1c40f; !important
 }
+ul.list-inline { margin-bottom: 0; }
+
+.dropzone {
+    min-height: 120px;
+    border: 1px solid #e5e5e5;
+}
+.attachment-ul {
+  list-style: none;
+}

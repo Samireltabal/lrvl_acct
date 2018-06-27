@@ -20,19 +20,21 @@ Route::group(['middleware' => 'web'], function () {
 // Customer Routes 
 Route::group(['middleware' => 'auth' ], function() {
     Route::get('/restricted', 'MainController@restricted');
+    Route::get('profile','DashboardController@profile')->name('profile');
+    Route::post('editUser', 'DashboardController@updateProfile')->name('editUser');
+    Route::post('updatePassword', 'DashboardController@updatePassword')->name('updatePassword');
+    Route::post('UpdateInfo', 'DashboardController@add_customer_info')->name('UpdateInfo');
+        Route::post('uploadPhoto', 'forms@uploadPhoto')->name('uploadPhoto');
+
 });
 // Employee Routes
 Route::group(['middleware' => 'employee' ], function () {
     //Profile Settings
-    Route::get('profile','DashboardController@profile')->name('profile');
-    Route::post('editUser', 'DashboardController@updateProfile')->name('editUser');
-    Route::post('updatePassword', 'DashboardController@updatePassword')->name('updatePassword');
-    Route::post('uploadPhoto', 'forms@uploadPhoto')->name('uploadPhoto');
-    Route::get('customer/id/{id}','DashboardController@view');
+
     // Restricted Frontend
     Route::get('/Dashboard', 'DashboardController@index')->name('Dashboard');
-        Route::get('/api/users','api@users')->name('users');
-            Route::post('closeTask' , 'TasksController@changeState')->name('closeTask');
+    Route::get('/api/users','api@users')->name('users');
+    Route::post('closeTask' , 'TasksController@changeState')->name('closeTask');
 
 
 
@@ -41,6 +43,7 @@ Route::group(['middleware' => 'employee' ], function () {
 
 Route::group(['middleware' => 'admin'], function () {
     // Members Section 
+        Route::get('customer/id/{id}','DashboardController@view');
     Route::get('Dashboard/roles', 'DashboardController@roles')->name('roles');
     Route::get('Dashboard/members', 'DashboardController@members')->name('members');
     // Settings Section
@@ -69,17 +72,26 @@ Route::group(['middleware' => 'admin'], function () {
         route::get('list','projectsController@list')->name('list'); 
         route::get('create','projectsController@create')->name('create');
         route::post('store','projectsController@store')->name('store');
+        route::post('updateName','projectsController@updateProjectName')->name('updateName');
+        route::post('updateGithub','projectsController@updateGithub')->name('updateGithub');
+        route::get('/id/{id}/delete','projectsController@destroy')->name('deleteProject');
+        route::post('uploadAttachment','forms@uploadAttachment')->name('uploadAttachment');
+        route::post('removeAttachment','forms@removeAttachment')->name('removeAttachment');
 
-        Route::group(['prefix' => 'task' , 'as' => 'task'], function() {
-            // route::get('/' , 'tasksController@list');   
-            // route::get('/{p_id}' , 'tasksController@index')->name('task');
-        });
+        
     });
-    
+    Route::group(['prefix' => 'task' , 'as' => 'task'], function() {
+                    route::post('addMember','TasksController@addMember')->name('addMember');
+        });
     // TEST ROUTES
     
     Route::get('testMail',function(){
-        return view('emails.password');
+        $user_name = 'Samir';
+        $admin_name = 'Admin';
+        $task_name = 'Task Name';
+        $project_name = 'Project Name';
+        $created_at = '01/01/1900 23:59';
+        return view('emails.taskAssigned')->with(compact('user_name','admin_name','project_name','task_name','created_at'));
     });
     //Route::get('search', 'searchAutocomplete@view');
 });
