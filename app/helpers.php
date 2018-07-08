@@ -1,6 +1,8 @@
 <?php 
 use App\options;
 use GuzzleHttp\Client;
+use App\messages;
+//use Auth;
 // Github Apis Handling
 function get_repo_url($repo_name = null) {
     if(isset($repo_name)){
@@ -101,5 +103,27 @@ function get_option_desc(string $key = null) {
         }
     }
 }
+function isAdmin() {
+  if (Auth::user()->authorizeRoles(['manager']) !== false){
+    return true;
+  }else{
+    return false;
+  }
+}
+function isEmployee() {
+  if (Auth::user()->authorizeRoles(['manager','employee']) !== false){
+    return true;
+  }else{
+    return false;
+  }
+}
+function get_unread_messages_count() {
+  $messages = messages::
+                      where('reciever_id',Auth::user()->id)
+                    ->where('status',1)
+                    ->get();
 
+  return $messages->count();                    
+
+}
 ?>

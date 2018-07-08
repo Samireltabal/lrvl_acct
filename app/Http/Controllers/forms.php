@@ -18,24 +18,29 @@ use App\attachments;
 class forms extends Controller
 {
    
+   /*
+   *    Update Role for User 
+   */
     public function change_role(request $request) {
         
         $id = $request->input('id');
         $role = $request->input('role');
         if(Auth::user()->id == $id){
-            return redirect('/Dashboard/members')->with('error','You cannot change your role');
+            return Redirect::back()->with('error','You cannot change your role');
         }
         else{
                 // echo $new_role;
                 DB::table('role_user')
                     ->where('user_id', $id)
                     ->update(['role_id' => $role]);
-            return redirect('/Dashboard/members')->with('success','Role Changed Successfully');
+            return Redirect::back()->with('success','Role Changed Successfully');
         }
         
     }
-    public function create_role(request $request) {
-        
+    /*
+    *   Create New Role
+    */
+    public function create_role(request $request) {        
         $this->validate($request, [
             'name' => 'required|string|max:100|unique:roles',
             'description' => 'required|string|max:1000'
@@ -46,8 +51,11 @@ class forms extends Controller
         $role->description = $request->input('description');
         $role->save();
 
-        return redirect('/Dashboard/roles')->with('success','Role Added Successfully');
+        return Redirect::back()->with('success','Role Added Successfully');
     }
+    /*
+    * DELETE USER FROM ADMIN PANEL
+    */
     public function destroy(request $request, $id)
     {
 
@@ -55,13 +63,17 @@ class forms extends Controller
             return redirect('/Dashboard/members')->with('error','You cannot delete yourself');
         }else{
             $user = User::find($id);
+            if($user->image !== null)
+            {
             Storage::delete('public/'. $user->image );
-
+            }
             $user->delete();
-            return redirect('/Dashboard/members')->with('success','Member Removed');
+            return Redirect::back()->with('success','Member Removed');
         } 
     }
-        
+    /*
+    *   User Create From Admin Panel 
+    */        
     public function storeUser(Request $request)
     {
         $this->validate($request, [
@@ -81,32 +93,47 @@ class forms extends Controller
              ->roles()
              ->attach(Role::where('name', $the_role)->first());
       
-          return redirect('Dashboard/members');
+          return Redirect::back()->with('success','member added Successfully');
     }
+    /*
+    *   IMAGE UPLOADING FORM 
+    */
     public function uploadPhoto(Request $request) {
+            // GET OLD IMAGE TO DELETE AFTER UPLOADING THE NEW ONE
             $old_image = Auth::user()->image;          
-            Storage::delete('app/public/'.$old_image);
+            // VALIDATE UPLOADED IMAGES
+            $this->validate($request, [
+                'image' => 'required | mimes:jpeg,jpg,png,gif | max:1999',
+            ]);
+            // NEW IMAGE
             $file = Input::file('image');
-
+            // IMAGE PROCESSING & UPLOADING
             $fileNameWithExt = $file->getClientOriginalName();
             $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extention = $file->getClientOriginalExtension();
             $FileNameToStore = $filename.'_'.time().'.'.$extention;
             $destinationPath ="storage";
             $file->move($destinationPath, $FileNameToStore);
-
+            // ATTACH IMAGE TO USER
             $user = Auth::user()->id ;  
-
             $the_user = User::find($user);
             $the_user->image = $FileNameToStore;
             $the_user->save();
+            // DELETE OLD IMAGE
+            if($old_image !== null){
+                Storage::delete('public/'.$old_image);
+            }        
+            // CREATE LOG INSTANCE
             $log = new logs;
             $log->users_id = $the_user->id;
               $log->activity = "<i class='fa fa-hashtag'></i> $the_user->id  $the_user->name Changed His Profile Picture" ;
               $log->save();   
-
-            return redirect('/profile')->with('success','Photo Changed Successfully');
+            // REDIRECT TO PROFILE
+            return Redirect::back()->with('success','Photo Changed Successfully');
     }
+    /*
+    *   Attachment ( Upload And Delete ) Forms
+    */
     public function uploadAttachment(Request $request) {
             $file = Input::file('file');
             $user = $request->input('user_id');
@@ -155,7 +182,9 @@ class forms extends Controller
         
 
     }
-    // Settings forms
+    /*
+    *   Settings ( Create & Update ) Forms
+    */
     public function createOption(Request $request) {
         
         $this->validate($request, [
@@ -170,7 +199,7 @@ class forms extends Controller
         $options->description = $request['description'];
         $options->save();
 
-        return redirect('/settings')->with('success','Option Added Successfully');
+        return Redirect::back()->with('success','Option Added Successfully');
     }
 
     public function updateOption(Request $request) {
@@ -189,7 +218,7 @@ class forms extends Controller
                     ->where('id', $id)
                     ->update([ 'value' => $request['value'] ]);
        
-        return redirect('/settings')->with('success','Option Updated Successfully');
+        return Redirect::back()->with('success','Option Updated Successfully');
 
         
     }

@@ -312,7 +312,7 @@
 										        <h4 class="modal-title" id="myModalLabel">Task Description</h4>
 										      </div>
 										      <div class="modal-body">
-										        											{{ $task->description }}
+										        											{!! $task->description !!}
 										      </div>
 										    </div>
 										  </div>

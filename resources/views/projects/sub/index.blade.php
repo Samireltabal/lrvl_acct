@@ -68,10 +68,45 @@
 					<td>
 					
                             <a href="/projects/id/{{ $project->id }}" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="/projects/id/{{ $project->id }}/delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a id="project-{{ $project->id }}"  onclick="confirmDelete('project-{{ $project->id }}');" link="/projects/id/{{ $project->id }}/delete" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
 				</tr>
 			@endforeach
 		</tbody>
 	</table>
+	<script>	
+		function confirmDelete(element) {
+			var instance =  document.getElementById(element);
+			$(instance).click(function( event ) {
+  				event.preventDefault();
+				  var theurl = $(this).attr('link');
+				  swal({
+						title: 'Are you sure?',
+						text: "You won't be able to revert this!",
+						type: 'warning',
+						showCancelButton: true,
+						confirmButtonColor: '#3085d6',
+						cancelButtonColor: '#d33',
+						confirmButtonText: 'Yes, delete it!'
+						}).then((result) => {
+						if (result.value) {
+							$.ajax({
+								type: 'GET',
+								url: theurl,
+								cache: false,
+								success: function() {           
+									swal(
+									'Deleted!',
+									'Your file has been deleted.',
+									'success'
+									)
+									window.location.reload();
+								}     
+							})
+							
+						}
+						})
+			});	
+		}
+	</script>
 @endsection

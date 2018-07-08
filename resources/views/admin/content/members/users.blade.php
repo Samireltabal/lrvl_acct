@@ -7,8 +7,7 @@
                             {{ session('status') }}
                         </div>
         @endif
-                                
-                <table id="datatable" class="table table-striped table-bordered">
+                        <table id="datatable" class="table table-striped table-bordered">
                         <thead>
                             <tr>
                                 <td>Id</td>

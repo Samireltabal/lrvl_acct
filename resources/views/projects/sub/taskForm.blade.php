@@ -20,7 +20,7 @@
 			<input type="hidden" name="project_id" value="{{ $project->id }}" required>
 			<div class="form-group">
 				<label for="description">Description</label>
-				<textarea class='form-control' name="description" id='description' required></textarea>
+				<textarea class='form-control' id='mytextarea' name="description" id='description' required></textarea>
 			</div>
 			<input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
 			<input type="submit" name="submit" value='Add Task' class='btn btn-success'>

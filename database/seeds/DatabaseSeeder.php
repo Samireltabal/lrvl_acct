@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
 {
-  $this->call('CountriesSeeder');
-  $this->command->info('Seeded the countries!'); 
+  $this->call([portfolioTabelSeeder::class]);
+  $this->command->info('Seeded Portfolio Items'); 
 }
 }

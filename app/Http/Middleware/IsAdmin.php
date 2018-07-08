@@ -20,6 +20,6 @@ class IsAdmin
                     return $next($request);
             }
 
-            return Redirect::back()->with('error','You are not authorised to view this page');
+            return Redirect::back()->with('error','You are not authorised to do this action');
         }
 }

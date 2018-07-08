@@ -1,5 +1,7 @@
 {
     "/js/all.js": "/js/all.js",
     "/js/jquerybundle.js": "/js/jquerybundle.js",
-    "/css/all.css": "/css/all.css"
+    "/css/all.css": "/css/all.css",
+    "/ui/app.js": "/ui/app.js",
+    "/ui/app.css": "/ui/app.css"
 }

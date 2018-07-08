@@ -100,6 +100,7 @@ class DashboardController extends Controller
         $user = new User;
         $available_roles = Role::all();
         $users = $user::paginate(5);;
+        
         return view('admin.content.members.users')->with(compact(['users','available_roles']));
 
     }

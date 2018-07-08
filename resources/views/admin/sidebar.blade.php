@@ -1,5 +1,5 @@
 <div class="navbar nav_title" style="border: 0;">
-    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>{{ get_option('app_name') }}</span></a>
+    <a href="/" class="site_title"><img src="{{ get_option('logo') }}"></span></a>
   </div>
 
   <div class="clearfix"></div>
@@ -27,35 +27,54 @@
   <!-- sidebar menu -->
   <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
     <div class="menu_section">
+      @if(isAdmin())
       <h3>{{ request()->route()->getAction('as') }}</h3>
-      
+      @endif
       <ul class="nav side-menu">
         <li><a><i class="fa fa-home"></i> {{ __('Home')}} <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/Dashboard"> {{ __('Dashboard')}} </a></li>
+            <li><a href="/dashboard"> {{ __('Dashboard')}} </a></li>
             <li><a href="/"> {{ __('Website')}} </a></li>
           </ul>
         </li>
+        @if(isAdmin())
         <li><a><i class="fa fa-user"></i> {{ __('Users') }} <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/Dashboard/members">Users</a></li>
-            <li><a href="/Dashboard/Create">Create User</a></li>
-            <li><a href="/Dashboard/roles">Roles</a></li>
+            <li><a href="{{ url('dashboard/members') }}">Users</a></li>
+            <li><a href="{{ url('dashboard/create') }}">Create User</a></li>
+            <li><a href="{{ url('dashboard/roles') }}">Roles</a></li>
           </ul>
         </li>
+        @endif
+        @if(isAdmin())
         <li><a><i class="fa fa-cog "></i> Settings <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/backup">Backups</a></li>
-            <li><a href="/settings">Site Options</a></li>            
+            <li><a href="{{ url('dashboard/backup') }}">Backups</a></li>
+            <li><a href="{{ url('dashboard/settings') }}">Site Options</a></li>            
           </ul>
         </li>
-       
+       @endif
         <li><a><i class="fa fa-folder"></i>Projects <span class="fa fa-chevron-down"></span></a>
           <ul class="nav child_menu">
-            <li><a href="/projects">List Projects <span class="label label-warning pull-right">WIP</span></a></li>
-            <li><a href="/projects/create">Create Porject</a></li>
+            <li><a href="{{ url('dashboard/projects') }}">List Projects <span class="label label-warning pull-right">WIP</span></a></li>
+            <li><a href="{{ url('projects/create') }}">Create Porject</a></li>
           </ul>
         </li>
+        <li>
+        <a href="{{ route('portfolio') }}">
+          <i class='fa fa-paint-brush'></i> Portfolio
+        </a>
+        </li>
+        <li>
+          <a href="{{ route('menu.main') }}">
+            <i class='fa fa-bars'></i> Menu Manager
+          </a>
+          </li>
+          <li>
+              <a href="{{ route('page.main') }}">
+                <i class='fa fa-book'></i> Pages Manager
+              </a>
+              </li>
       </ul>
     </div>
     <div class="menu_section">
@@ -69,7 +88,7 @@
       </ul>
       <!-- /menu footer buttons -->
       <div class="sidebar-footer hidden-small">
-        <a data-toggle="tooltip" data-placement="top" title="Settings" href='{{ route('settings') }}'>
+        <a data-toggle="tooltip" data-placement="top" title="Settings" href='{{ url("dashboard/settings") }}'>
           <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
         </a>
         <a data-toggle="tooltip" data-placement="top" title="FullScreen">

@@ -19,7 +19,7 @@
                                 <br>
                                     Use Condition check 
                                     <br>
-                                    @if(  get_checkbox('new checkbox') )<br>
+                                    @if(  get_checkbox('$option->option') )<br>
                                      // Your Code if True<br>
                                     @else <br>
                                      // Your Code if False <br>
