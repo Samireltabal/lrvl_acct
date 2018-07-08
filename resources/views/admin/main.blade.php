@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-121636854-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-121636854-1');
+    </script>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
@@ -22,18 +31,9 @@
         <!-- sidebar menu -->
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <?php
-              if (Auth::user()->authorizeRoles(['manager']) !== false) {
-            ?>
+           
                 @include('admin.sidebar')
-            <?php
-                }else{
-                    ?>
-                @include('admin.membersidebar')
-                    <?php 
-                }
-              
-              ?>
+           
               </div>
             </div>
           <!-- /sidebar Menu -->
@@ -59,8 +59,6 @@
 
 
                <script type="text/javascript" src="{{ asset('js/all.js') }}"></script>
-                        
-
         @include('inc.messages')
 
 @if( ! empty($main_graph) )
@@ -167,6 +165,19 @@ $('#developer_name').each(function() {
         });
         </script>
         
+        <script>
+                tinymce.init({
+                selector: '#pageCreator',
+                theme: 'modern',
+    
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
 
+              });
+            </script>
   </body>
 </html>

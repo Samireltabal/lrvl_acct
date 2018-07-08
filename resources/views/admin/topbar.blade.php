@@ -15,9 +15,14 @@
           <span class=" fa fa-angle-down"></span>
         </a>
         <ul class="dropdown-menu dropdown-usermenu pull-right">
-          <li><a href="{{ route('profile') }}"> {{ __('Profile') }}</a></li>
+          @if(isAdmin())
+          <li><a href="{{ url('dashboard/profile') }}"> {{ __('Profile') }}</a></li>
+          @else
+          <li><a href="{{ url('profile') }}"> {{ __('Profile') }}</a></li>
+          @endif
+          <li><a href="{{ url('dashboard/messages') }}"> {{ __('Messages') }}</a></li>
           @if (Session::get('admin', 1))
-          <li><a href="{{ route('settings') }}"> {{ __('Settings') }}</a></li>
+          <li><a href="{{ route('dashboardsettings') }}"> {{ __('Settings') }}</a></li>
           @endif
           <li><a class="dropdown-item" href="{{ route('logout') }}"
             onclick="event.preventDefault();

@@ -16,4 +16,4 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('categories','DashboardController@categories')->name('Categories');
+Route::get('users','Api@users')->name('Users');

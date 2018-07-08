@@ -109,11 +109,11 @@
                             </div>
                             <div role="tabpanel" class="tab-pane fade active in" id="tab_content2" aria-labelledby="edit-tab">
   
-                                @include('profiles.data')
+                                @include('ui.profiles.data')
 
                              <hr>
                    
-                                @include('profiles.password')
+                                @include('ui.profiles.password')
 
                               <hr>
 

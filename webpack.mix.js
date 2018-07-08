@@ -25,8 +25,12 @@ mix.combine([
 	'public/bower_components/gentelella/vendors/jqvmap/dist/maps/jquery.vmap.world.js',
 	'public/bower_components/gentelella/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js',
 	'public/bower_components/dropzone/dist/dropzone.js',
+	'public/bower_components/gentelella/vendors/switchery/dist/switchery.min.js',
 	'node_modules/chart.js/dist/dist/Chart.bundle.min.js',
 	'public/bower_components/izitoast/dist/js/iziToast.min.js',
+	'resources/assets/bower_components/sweetalert2/dist/sweetalert2.min.js',
+	'resources/assets/bower_components/tinymce/tinymce.min.js',
+	'public/bower_components/gentelella/vendors/jquery.tagsinput/src/jquery.tagsinput.js',
 	'public/js/myapp.js'
 	], 'public/js/all.js')
 mix.combine([
@@ -34,6 +38,7 @@ mix.combine([
 	'public/bower_components/jquery-ui/jquery-ui.js'
 	]
 	,'public/js/jquerybundle.js')
+
    
    mix.styles([
     'public/bower_components/gentelella/vendors/bootstrap/dist/css/bootstrap.css',
@@ -45,9 +50,35 @@ mix.combine([
     'public/bower_components/gentelella/vendors/jqvmap/dist/jqvmap.min.css',
     'public/bower_components/gentelella/vendors/bootstrap-daterangepicker/daterangepicker.css',
     'public/bower_components/izitoast/dist/css/iziToast.min.css',
-    	'node_modules/dygraphs/dist/dygraph.min.css',
-
+	'node_modules/dygraphs/dist/dygraph.min.css',
+	'public/bower_components/gentelella/vendors/switchery/dist/switchery.min.css',
+	'resources/assets/bower_components/sweetalert2/dist/sweetalert2.min.css',
     'public/bower_components/gentelella/build/css/custom.min.css',
     'bower_components/jquery-ui/themes/base/all.css',
     'public/css/myapp.css',
 	], 'public/css/all.css');
+
+
+   mix.combine([
+	'resources/assets/ui/js/core/jquery.min.js',
+	'resources/assets/ui/js/core/popper.min.js',
+	'resources/assets/ui/js/core/bootstrap-material-design.min.js',
+	'resources/assets/ui/js/plugins/moment.min.js',
+	'resources/assets/ui/js/plugins/bootstrap-datetimepicker.js',
+	'resources/assets/ui/js/plugins/nouislider.min.js',
+	'public/bower_components/izitoast/dist/js/iziToast.min.js',
+	'resources/assets/ui/js/material-kit.min.js',
+	'public/bower_components/jquery-ui/jquery-ui.js',
+	'public/bower_components/lightbox2/dist/js/lightbox.min.js',
+	'resources/assets/js/custom.js',
+	], 'public/ui/app.js');
+
+   mix.styles([
+	'node_modules/bootstrap/dist/css/bootstrap.min.css',   
+	'resources/assets/ui/css/material-kit.css',
+   	'resources/assets/ui/css/custom.css',
+   	'node_modules/font-awesome/css/font-awesome.min.css',
+	'public/bower_components/jquery-ui/themes/base/all.css',
+	'public/bower_components/lightbox2/dist/css/lightbox.min.css',
+   	'public/bower_components/izitoast/dist/css/iziToast.min.css',
+   	],'public/ui/app.css');

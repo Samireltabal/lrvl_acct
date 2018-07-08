@@ -15,6 +15,10 @@ class viewProjects
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if ($request->id == Auth::user()->id ||  Auth::user()->authorizeRoles(['manager']) !== false) {
+                    return $next($request);
+            }
+
+            return redirect('/')->with('error','You are not authorised to view this page');
     }
 }
