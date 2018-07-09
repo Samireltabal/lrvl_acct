@@ -38,7 +38,7 @@
 			@endsection
 
 			@section('page_content')
-						@if (count($project))
+						@if ($project)
 
 				<div class="col-md-3 col-sm-3 col-xs-12 profile_left">
 				   	
@@ -102,7 +102,7 @@
               
   <div class="col-md-9 col-sm-9 col-xs-12" >
   	  					<h3><i class="fa fa-address-card"></i> Customer data</h3>
-  	  					@if(count($project->customer->info))
+  	  					@if($project->customer->info)
   					
 						<h4><i class='fa fa-user'></i> Customer Name : {{ $project->customer->info[0]->name }}</h4>
 						<h4><i class='fa fa-envelope'></i> Email : {{ $project->customer->email }}</h4>
@@ -155,7 +155,7 @@
 						<div class='clearfix'></div>
 						<hr id="attachments">
 						<h3><i class="fa fa-paperclip"></i> Attachments </h3>
-						@if(count($project->attachments))
+						@if($project->attachments)
 							<ul class='attachment-ul'>
 							@foreach($project->attachments as $attachment)
 							<li class='row'>
@@ -196,7 +196,7 @@
 						</div>
 						<hr>
 						<div class="col-md-12">
-						@if( count($project->tasks) )
+						@if( $project->tasks )
 						<h3>Associated Tasks</h3>
 							<table class='table table-responsive table-striped'>
 								<thead>
@@ -214,7 +214,7 @@
 								</thead>
 								<tbody>
 							@foreach($project->tasks as $task)
-								@if(count($task))
+								@if($task)
 									<tr>	
 										<td>{{ $task->id }}</td>
 										<td>{{ $task->name }}</td>

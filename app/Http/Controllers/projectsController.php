@@ -35,7 +35,7 @@ class ProjectsController extends Controller
 	public function show($project_id) {
 		$project = projects::find($project_id);
 		
-		if(count($project)){
+		if($project){
 			$customer = $project->customer;
 			$tasks = $project->tasks;
 			$attachments = $project->attachments;

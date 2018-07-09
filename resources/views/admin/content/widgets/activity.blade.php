@@ -22,7 +22,7 @@
                                     </h2>
                       <div class="byline">
                         <span>{{ $log->created_at }}</span> by <a>
-                        @if(count($log->user['name']))
+                        @if($log->user['name'])
                           {{ $log->user['name'] }}
                         @else
                           <span style='color:red;'>deleted user</span>
